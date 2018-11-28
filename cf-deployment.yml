@@ -416,7 +416,7 @@ instance_groups:
   networks:
   - name: default
   jobs:
-  - name: cfdot
+  - name: cfdot //cf-cli  //查看cell上面跑了哪些lrps和task
     release: diego
     properties:
       tls: &cfdot_tls_client_properties
@@ -675,9 +675,9 @@ instance_groups:
           statsd_injector:
             cert: "((loggregator_tls_statsdinjector.certificate))"
             key: "((loggregator_tls_statsdinjector.private_key))"
-- name: singleton-blobstore
+- name: singleton-blobstore  //最好用对象存储来做blobstore存贮
   migrated_from:
-  - name: blobstore
+  - name: blobstore          //
   azs:
   - z1
   instances: 1
@@ -721,7 +721,7 @@ instance_groups:
   instances: 2
   vm_type: small
   vm_extensions:
-  - 50GB_ephemeral_disk
+  - 50GB_ephemeral_disk  //非必须，有的cell需要一个ephmeral去填写.
   stemcell: default
   networks:
   - name: default
@@ -987,7 +987,7 @@ instance_groups:
   networks:
   - name: default
   jobs:
-  - name: cloud_controller_worker
+  - name: cloud_controller_worker 
     release: capi
     properties:
       cc:
