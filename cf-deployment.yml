@@ -7,12 +7,12 @@ update:
   max_in_flight: 1
   serial: false
   update_watch_time: 5000-1200000
-addons:
-- name: loggregator_agent
-  include:
+addons:            //每个组件都需要的job 写在add-on里面 
+- name: loggregator_agent   //收集各个job的日志
+  include:                 //stemcell是如下类型就安装
     stemcell:
     - os: ubuntu-xenial
-  exclude:
+  exclude:                //针对某些job不安装
     jobs:
     - name: smoke_tests
       release: cf-smoke-tests
@@ -267,9 +267,9 @@ addons:
           network: default
           domain: bosh
 
-instance_groups:
+instance_groups:    //部署出来的instances
 - name: smoke-tests
-  lifecycle: errand
+  lifecycle: errand //只跑一次，就关机
   azs:
   - z1
   instances: 1
